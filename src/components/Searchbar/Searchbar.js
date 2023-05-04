@@ -2,6 +2,13 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { SlMagnifier } from 'react-icons/sl';
 import { toast } from 'react-toastify';
+import {
+  SearchBar,
+  SerchForm,
+  Input,
+  SearchBtn,
+  SerchFormBtnLabel,
+} from './Searchbar.styled';
 
 export default class Searchbar extends Component {
   state = {
@@ -31,13 +38,13 @@ export default class Searchbar extends Component {
   render() {
     const { searchQuery } = this.state;
     return (
-      <header>
-        <form onSubmit={this.handleSubmit}>
-          <button type="submit">
-            <SlMagnifier /> <span>Search</span>
-          </button>
+      <SearchBar>
+        <SerchForm onSubmit={this.handleSubmit}>
+          <SearchBtn type="submit">
+            <SlMagnifier /> <SerchFormBtnLabel></SerchFormBtnLabel>
+          </SearchBtn>
 
-          <input
+          <Input
             type="text"
             autoComplete="off"
             autoFocus
@@ -45,8 +52,8 @@ export default class Searchbar extends Component {
             value={searchQuery}
             onChange={this.handlesearchQueryChange}
           />
-        </form>
-      </header>
+        </SerchForm>
+      </SearchBar>
     );
   }
 }
