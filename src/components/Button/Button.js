@@ -1,14 +1,24 @@
 import React from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { LoadMoreBtn } from './Button.styled';
+import { animateScroll as scroll } from 'react-scroll';
 
-const Button = ({ onClick, page }) => {
-  return <LoadMoreBtn onClick={() => onClick(page)}>Load more</LoadMoreBtn>;
-};
+export default class Button extends Component {
+  static propTypes = {
+    onClick: PropTypes.func.isRequired,
+  };
 
-Button.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  page: PropTypes.number.isRequired,
-};
+  scrollPageOnBtnMore = () => {
+    this.props.onClick();
+    scroll.scrollToBottom();
+  };
 
-export default Button;
+  render() {
+    return (
+      <LoadMoreBtn onClick={this.scrollPageOnBtnMore} type="button">
+        Load more
+      </LoadMoreBtn>
+    );
+  }
+}

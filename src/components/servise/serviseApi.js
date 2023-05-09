@@ -5,7 +5,13 @@ function fetchImages(query, page = 1) {
 
   return fetch(url).then(response => {
     if (response.ok) {
-      return response.json();
+      return response.json().then(data => {
+        if (data.hits.length > 0) {
+          return data;
+        } else {
+          throw new Error('No images found for the query');
+        }
+      });
     }
 
     return Promise.reject(new Error('No response from server'));
